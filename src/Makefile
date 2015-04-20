@@ -1,5 +1,5 @@
 tests: 
-	g++ -g tests.cpp -o tests
+	g++ -g -Wall -Wextra tests.cpp -o tests
 
 clean:
 	rm -f tests

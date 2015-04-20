@@ -212,12 +212,12 @@ int main() {
     RUN_TEST(check_crear_carrera_vacia);
     RUN_TEST(check_agregar_corredores);
     RUN_TEST(check_agregar_corredores2);
-    RUN_TEST(check_copiar_carrera);
+    //RUN_TEST(check_copiar_carrera);
     RUN_TEST(check_se_cansa);
     RUN_TEST(check_sobrepasar);
-    RUN_TEST(check_corredor_filmado);
-    RUN_TEST(check_primero);
-    RUN_TEST(check_posicion);
+    //RUN_TEST(check_corredor_filmado);
+    //RUN_TEST(check_primero);
+    //RUN_TEST(check_posicion);
     return 0;
 }
 
