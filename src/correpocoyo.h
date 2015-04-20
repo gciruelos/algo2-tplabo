@@ -149,5 +149,99 @@ ostream& operator<<(ostream& out, const CorrePocoyo<T>& a) {
 
 // Implementación a hacer por los alumnos.
 
+template<typename T>
+CorrePocoyo<T>::CorrePocoyo(){
+
+}
+
+
+template<typename T>
+CorrePocoyo<T>::CorrePocoyo(const CorrePocoyo<T>&){
+
+}
+
+template<typename T>
+CorrePocoyo<T>::~CorrePocoyo(){
+
+}
+
+template<typename T>
+void CorrePocoyo<T>::nuevoCorredor(const T&){
+
+}
+
+template<typename T>
+void CorrePocoyo<T>::nuevoCorredor(const T&, const T&){
+
+}
+
+
+template<typename T>
+void CorrePocoyo<T>::seCansa(const T&){
+
+}
+
+template<typename T>
+void CorrePocoyo<T>::sobrepasar(const T&){
+
+}
+
+
+template<typename T>
+const T& CorrePocoyo<T>::corredorFilmado() const{
+
+}
+
+
+template<typename T>
+void CorrePocoyo<T>::filmarProxPerdedor(){
+
+}
+
+template<typename T>
+void CorrePocoyo<T>::filmarProxExitoso(){
+
+}
+
+
+template<typename T>
+const T& CorrePocoyo<T>::damePrimero() const{
+
+}
+
+template<typename T>
+int CorrePocoyo<T>::damePosicion(const T& ) const{
+
+}
+
+
+template<typename T>
+const T& CorrePocoyo<T>::dameCorredorEnPos(int) const{
+
+}
+
+
+template<typename T>
+bool CorrePocoyo<T>::esVacia() const{
+
+}
+	
+
+template<typename T>
+int CorrePocoyo<T>::tamanio() const{
+
+}
+
+
+template<typename T>
+bool CorrePocoyo<T>::operator==(const CorrePocoyo<T>&) const{
+
+}
+
+template<typename T>
+ostream& CorrePocoyo<T>::mostrarCorrePocoyo(ostream&) const{
+
+}
+	
 
 #endif //CORREPOCOYO_H_
