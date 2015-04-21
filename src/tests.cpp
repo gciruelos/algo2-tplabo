@@ -119,8 +119,10 @@ void check_sobrepasar() {
     carrera.nuevoCorredor(27);
     carrera.nuevoCorredor(20,22);
 
+   
     carrera.sobrepasar(22);
 
+    
     ASSERT_EQ(to_s(carrera), "[10, 22, 20, 27]");
 
     carrera.sobrepasar(22);
@@ -215,9 +217,13 @@ int main() {
     //RUN_TEST(check_copiar_carrera);
     RUN_TEST(check_se_cansa);
     RUN_TEST(check_sobrepasar);
-    //RUN_TEST(check_corredor_filmado);
-    //RUN_TEST(check_primero);
-    //RUN_TEST(check_posicion);
+    RUN_TEST(check_corredor_filmado);
+    RUN_TEST(check_primero);
+    RUN_TEST(check_posicion);
+
+    
     return 0;
+
+
 }
 

@@ -211,6 +211,22 @@ CorrePocoyo<T>::CorrePocoyo(const CorrePocoyo<T>& otro){
 
 template<typename T>
 CorrePocoyo<T>::~CorrePocoyo(){
+  if(this->tamanio() == 0){
+  }
+  else if(this->tamanio() == 1){
+    delete primero;
+  }else{
+    Nodo * nodoActual = primero;
+    Nodo * nodoSiguiente = nodoActual->siguiente;
+
+    while(nodoActual->siguiente!=NULL){
+      delete nodoActual;
+      nodoActual = nodoSiguiente;
+      nodoSiguiente = nodoSiguiente->siguiente;
+    }
+    delete nodoActual;
+  }
+ 
 
 }
 
@@ -225,10 +241,11 @@ void CorrePocoyo<T>::nuevoCorredor(const T& t){
   
   nuevo->siguiente = NULL;
   nuevo->anterior = ultimo;
-  T dato(t); nuevo->corredor = dato;
+  nuevo->corredor = T(t);
 
   if(this->esVacia()){
 		primero = nuevo;
+    camara = nuevo;
 	} else{
   	ultimo->siguiente = nuevo; 
   }
@@ -246,7 +263,7 @@ template<typename T>
 void CorrePocoyo<T>::nuevoCorredor(const T& nuevo_corredor, const T& existente){
 	cant_corredores++;
   Nodo * nuevo = new Nodo;
-  T dato(nuevo_corredor); nuevo->corredor = dato;
+  nuevo->corredor = T(nuevo_corredor);
 
 	
 	Nodo * nodoActual = primero;
@@ -324,20 +341,26 @@ void CorrePocoyo<T>::sobrepasar(const T& pasador){
 	}
 	//nodoActual->corredor = pasador
 
-  nodoAnterior = nodoActual->anterior;
+  nodoAnterior = nodoActual->anterior;   
   nodoSiguiente = nodoActual->siguiente;
 	
-	nodoActual->siguiente = nodoAnterior;
-	nodoActual->anterior = nodoAnterior->anterior;
+	nodoActual->siguiente = nodoAnterior;           //ok
+	nodoActual->anterior = nodoAnterior->anterior;  //ok
 
-	nodoAnterior->anterior = nodoActual;
-	nodoAnterior->siguiente = nodoSiguiente;
+	nodoAnterior->anterior = nodoActual;            //ok
+	nodoAnterior->siguiente = nodoSiguiente;        //ok
 
-	nodoSiguiente->anterior = nodoAnterior;
+  if(nodoSiguiente!=NULL){
+	  nodoSiguiente->anterior = nodoAnterior;
+  } else{
+    ultimo = nodoAnterior;
+  }
 
-	(nodoAnterior->anterior)->siguiente = nodoActual;
-
-	//FALTA TERMINAR
+  if(nodoActual->anterior != NULL){
+	  (nodoActual->anterior)->siguiente = nodoActual;
+  } else{
+    primero = nodoActual;
+  }
 }
 
 
@@ -347,31 +370,74 @@ const T& CorrePocoyo<T>::corredorFilmado() const{
 }
 
 
+/*
+ * Devuelve el próximo elemento según el orden dado.
+ * Pasa a filmar al corredor de atás 
+ *
+ * PRE: Hay corredore en la CorrePocoyo.
+ */
 template<typename T>
 void CorrePocoyo<T>::filmarProxPerdedor(){
 	camara = camara->siguiente;
 
 }
 
+/*
+ * Devuelve el próximo elemento según el orden dado.
+ * Pasa a filmar al corredor de adelante 
+ *
+ * PRE: Hay corredore en la CorrePocoyo.
+ */
 template<typename T>
 void CorrePocoyo<T>::filmarProxExitoso(){
   camara = camara->anterior;
 }
 
 
+/*
+ * Devuelve al Primero. 
+ *
+ * PRE: Hay elementos 
+ */
 template<typename T>
 const T& CorrePocoyo<T>::damePrimero() const{
   return primero->corredor;
 }
 
-template<typename T>
-int CorrePocoyo<T>::damePosicion(const T& ) const{
 
+/*
+ * Devuelve la posición del elemento pasado por parámetro. 
+ *
+ * PRE: Existe ese corredor 
+ */
+template<typename T>
+int CorrePocoyo<T>::damePosicion(const T& c) const{
+
+  Nodo * nodoActual = primero;
+
+  int i = 1;
+  while(nodoActual->corredor != c){
+    nodoActual = nodoActual->siguiente;
+    i++;
+  }
+  return i;
 }
 
 
+/*
+ * Devuelve el corredor de la posición. 
+ *
+ * PRE: Existe al menos esa cantidad de corredores en la carrera
+ */
+
 template<typename T>
-const T& CorrePocoyo<T>::dameCorredorEnPos(int) const{
+const T& CorrePocoyo<T>::dameCorredorEnPos(int pos) const{
+  Nodo * nodoActual = primero;
+  while(pos != 1){
+    nodoActual = nodoActual->siguiente;
+    pos--;
+  }
+  return nodoActual->corredor;
 
 }
 
@@ -389,7 +455,21 @@ int CorrePocoyo<T>::tamanio() const{
 
 
 template<typename T>
-bool CorrePocoyo<T>::operator==(const CorrePocoyo<T>&) const{
+bool CorrePocoyo<T>::operator==(const CorrePocoyo<T>& otro) const{
+  if(this->cant_corredores != otro.cant_corredores)
+    return false;
+
+  Nodo * nodoActual = this->primero;
+  Nodo * nodoActual_otro = otro.primero;
+
+  while(nodoActual != NULL){
+    if(nodoActual->corredor != nodoActual_otro->corredor){
+      return false;
+    }
+    nodoActual = nodoActual->siguiente;
+    nodoActual_otro = nodoActual_otro->siguiente;
+  }
+  return false;
 
 }
 
@@ -410,8 +490,9 @@ ostream& CorrePocoyo<T>::mostrarCorrePocoyo(ostream& os) const{
     if(nodoActual->siguiente != NULL) os << ", ";
 	
 	  nodoActual = nodoActual->siguiente;
-}
+  }
 	os << "]";
+  return os;
 }
 	
 
