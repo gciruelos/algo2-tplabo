@@ -71,13 +71,14 @@ void check_copiar_carrera() {
 
     CorrePocoyo<int> copia(carrera);
 
+    
     ASSERT_EQ((carrera==copia),true);
+
 
     for(int i=1;i<=carrera.tamanio();i++)
         ASSERT_EQ(carrera.dameCorredorEnPos(i),copia.dameCorredorEnPos(i));
 
     ASSERT_EQ(carrera.corredorFilmado(),copia.corredorFilmado());
-
 }
 
 /*
@@ -214,7 +215,7 @@ int main() {
     RUN_TEST(check_crear_carrera_vacia);
     RUN_TEST(check_agregar_corredores);
     RUN_TEST(check_agregar_corredores2);
-    //RUN_TEST(check_copiar_carrera);
+    RUN_TEST(check_copiar_carrera);
     RUN_TEST(check_se_cansa);
     RUN_TEST(check_sobrepasar);
     RUN_TEST(check_corredor_filmado);

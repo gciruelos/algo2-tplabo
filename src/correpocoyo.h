@@ -176,17 +176,24 @@ CorrePocoyo<T>::CorrePocoyo(const CorrePocoyo<T>& otro){
 		ultimo = NULL;
 		camara = NULL;
 	} else{
+
+    
+
+
     Nodo * nodoActual_otro = otro.primero;
 
     Nodo * nodoAnterior = NULL;
     Nodo * nodoActual = new Nodo;
   	
 		nodoActual->anterior = nodoAnterior;
-		T dato(nodoActual_otro->corredor); nodoActual->corredor = dato;
-    //falta copiar dato
+		nodoActual->corredor = T(nodoActual_otro->corredor);
+
+      if(otro.camara == nodoActual_otro){
+        camara = nodoActual;
+        
+      }
 
 	  primero = nodoActual;
-
   
 
   	while(nodoActual_otro->siguiente != NULL){
@@ -198,11 +205,15 @@ CorrePocoyo<T>::CorrePocoyo(const CorrePocoyo<T>& otro){
 			nodoActual->anterior = nodoAnterior;
 			nodoAnterior->siguiente = nodoActual;
 			
-		  T dato(nodoActual_otro->corredor); nodoActual->corredor = dato;
-			//copiar dato
+		  nodoActual->corredor = T(nodoActual_otro->corredor);
+
+      if(otro.camara == nodoActual_otro){
+        camara = nodoActual;
+        
+      }
 
 			//fijarme a donde apunta la camara
-		}
+		} 
 
     nodoActual->siguiente = NULL;
 		ultimo = nodoActual;
@@ -469,7 +480,7 @@ bool CorrePocoyo<T>::operator==(const CorrePocoyo<T>& otro) const{
     nodoActual = nodoActual->siguiente;
     nodoActual_otro = nodoActual_otro->siguiente;
   }
-  return false;
+  return true;
 
 }
 
