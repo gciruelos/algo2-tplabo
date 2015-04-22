@@ -210,9 +210,7 @@ CorrePocoyo<T>::CorrePocoyo(const CorrePocoyo<T>& otro){
       if(otro.camara == nodoActual_otro){
         camara = nodoActual;
         
-      }
-
-			//fijarme a donde apunta la camara
+      }	
 		} 
 
     nodoActual->siguiente = NULL;
