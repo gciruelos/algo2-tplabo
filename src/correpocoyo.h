@@ -279,7 +279,7 @@ void CorrePocoyo<T>::nuevoCorredor(const T& nuevo_corredor, const T& existente){
 	
 	Nodo * nodoActual = primero;
 
-	while(nodoActual->corredor != existente){
+	while(!(nodoActual->corredor == existente)){
 		nodoActual = nodoActual->siguiente;
 	}
 
@@ -312,7 +312,7 @@ void CorrePocoyo<T>::seCansa(const T& cansado){
 
 	Nodo * nodoActual = primero;
 
-	while(nodoActual->corredor != cansado){
+	while(!(nodoActual->corredor == cansado)){
 		nodoActual = nodoActual -> siguiente;
 	}
 
@@ -347,7 +347,7 @@ void CorrePocoyo<T>::sobrepasar(const T& pasador){
 	Nodo * nodoActual = primero;
   Nodo * nodoAnterior, * nodoSiguiente; 
 
-	while(nodoActual->corredor != pasador){
+	while(!(nodoActual->corredor == pasador)){
 		nodoActual = nodoActual->siguiente;
 	}
 	//nodoActual->corredor = pasador
@@ -389,7 +389,8 @@ const T& CorrePocoyo<T>::corredorFilmado() const{
  */
 template<typename T>
 void CorrePocoyo<T>::filmarProxPerdedor(){
-	camara = camara->siguiente;
+	if(camara->siguiente != NULL) 
+	  camara = camara->siguiente;
 
 }
 
@@ -401,7 +402,8 @@ void CorrePocoyo<T>::filmarProxPerdedor(){
  */
 template<typename T>
 void CorrePocoyo<T>::filmarProxExitoso(){
-  camara = camara->anterior;
+	if(camara->anterior != NULL)
+      camara = camara->anterior;
 }
 
 
@@ -427,7 +429,7 @@ int CorrePocoyo<T>::damePosicion(const T& c) const{
   Nodo * nodoActual = primero;
 
   int i = 1;
-  while(nodoActual->corredor != c){
+  while(!(nodoActual->corredor == c)){
     nodoActual = nodoActual->siguiente;
     i++;
   }
@@ -474,7 +476,7 @@ bool CorrePocoyo<T>::operator==(const CorrePocoyo<T>& otro) const{
   Nodo * nodoActual_otro = otro.primero;
 
   while(nodoActual != NULL){
-    if(nodoActual->corredor != nodoActual_otro->corredor){
+    if(!(nodoActual->corredor == nodoActual_otro->corredor)){
       return false;
     }
     nodoActual = nodoActual->siguiente;
